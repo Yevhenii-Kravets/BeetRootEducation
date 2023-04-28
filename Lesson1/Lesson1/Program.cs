@@ -3,6 +3,8 @@
     private static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!" +
-            "\nHello, Team!");
+            "\nHello, Team!" +
+            "\nUpdate text!" +
+            "\nBye :)");
     }
 }

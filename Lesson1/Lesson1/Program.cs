@@ -4,6 +4,7 @@
     {
         Console.WriteLine("Hello, World!" +
             "\nHello, Team!" +
-            "\nUpdate text!");
+            "\nUpdate text!" +
+            "\nBye :)");
     }
 }

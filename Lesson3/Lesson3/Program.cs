@@ -6,15 +6,20 @@ internal class Program
     {
         Console.WriteLine("Lesson3\n");
 
+        int X = 0, Y = 0;
         Console.Write("Enter an integer X: ");
-        int X = int.Parse(Console.ReadLine());
+        bool XisTrue = int.TryParse(Console.ReadLine(), out X);
         Console.Write("Enter an integer Y: ");
-        int Y = int.Parse(Console.ReadLine());
+        bool YisTrue = int.TryParse(Console.ReadLine(), out Y);
 
-
-        int result = 0;
-        for (int i = (X > Y ? Y : X); i != (X < Y ? Y : X) + 1;)
-            result += i++;
-        Console.WriteLine(result);
+        if (XisTrue && YisTrue)
+        {
+            int result = 0;
+            for (int i = (X > Y ? Y : X); i != (X < Y ? Y : X) + 1;)
+                result += i++;
+            Console.WriteLine("Sum: " + result);
+        }
+        else
+            Console.WriteLine("Invalid input");
     }
 }

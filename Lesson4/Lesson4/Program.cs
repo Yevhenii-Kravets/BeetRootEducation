@@ -1,100 +1,74 @@
 ﻿internal class Program
 {
-    static int MultiplicationOrDivision(int a, int b, bool shouldDivine)
+    static int MaxInt(int a, int b)
     {
-        if (shouldDivine)
-            return a / b;
-        return a * b;
+        return a > b ? a : b;
     }
 
-    static bool CanDivideByTwo(int a)
+    static int MaxInt(int a, int b, int c)
     {
-        return a % 2 == 0;
+        int ab = a > b ? a : b;
+        return ab > c ? ab : c; 
     }
 
-    static int SumBetweenNumber(ref int X, int Y)
+    static int MaxInt(int a, int b, int c, int d)
     {
-        X = 10;
-        int result = 0;
-        for (int i = (X > Y ? Y : X); i != (X < Y ? Y : X) + 1;)
+        int ab = a > b ? a : b;
+        int cd = c > d ? c : d;
+        return ab > cd ? ab : cd;
+    }
+
+    static int MinInt(int a, int b)
+    {
+        return a < b ? a : b;
+    }
+
+    static int MinInt(int a, int b, int c)
+    {
+        int ab = a < b ? a : b;
+        return ab < c ? ab : c;
+    }
+
+    static int MinInt(int a, int b, int c, int d)
+    {
+        int ab = a < b ? a : b;
+        int cd = c < d ? c : d;
+        return ab < cd ? ab : cd;
+    }
+
+    static bool TrySumIfOdd(int a, int b, out int result)
+    {
+        result = 0;
+        int min = (a > b ? b : a);
+        int max = (a < b ? b : a);
+
+        for (int i = min; i <= max;)
             result += i++;
-        return result;
-    }
-
-    static bool TryParseInt(string value, out int parsedValue)
-    {
-        var parseResult = int.TryParse(value, out parsedValue);
-        return parseResult;
-    }
-
-    static bool TryDivideByThree(int input, out int divisionResult)
-    {
-        divisionResult = input / 3;
-        return input % 3 == 0;
-    }
-
-    //FIBONACCI
-    static int SumFibonacci(int a)
-    {
-        int previousPreviousNumber = 0;
-        int previousNumber = 1;
-        int count = 3;
-        int fiboSum = previousPreviousNumber + previousNumber;
-
-        while(count <= a)
-        {
-            fiboSum += previousNumber + previousPreviousNumber;
-
-            int temp = previousNumber;
-            previousNumber = previousNumber + previousPreviousNumber;
-            previousPreviousNumber = temp;
-
-            count++;
-        }
-
-        return fiboSum;
-    }
-    /* HOMEWORK
-    static int FibonacciSumRecursively(int a)
-    {
-        if (a == 1) return 0;
-        if (a == 2) return 1;
-        if (a == 3) return 2;
-    }
-    */
-    static int GenerateRandomNumber(int min, int max)
-    {
-        return new Random().Next(min, max);
-    }
-
-    int Add(int a, int b)
-    {
-        return a + b;
-    }
-
-    bool Add(int a, int b)
-    {
-        return (a + b) % 2 == 0;
+        return result % 2 != 0;
     }
 
     private static void Main(string[] args)
     {
-        int a = 24;
-        int b = 2;
-        int result = MultiplicationOrDivision(a, b, true);
-        int result1 = SumBetweenNumber(ref a, b);
-        string input = "100";
-        int result2 = 0;
-        int divisionByResult = 0;
-        bool result3 = TryDivideByThree(a, out divisionByResult);
+        int result = 0;
+        int A = 0, B = 0, C = 0, D = 0;
+        Console.Write("Enter an integer A: ");
+        bool AisTrue = int.TryParse(Console.ReadLine(), out A);
+        Console.Write("Enter an integer B: ");
+        bool BisTrue = int.TryParse(Console.ReadLine(), out B);
+        Console.Write("Enter an integer C: ");
+        bool CisTrue = int.TryParse(Console.ReadLine(), out C);
+        Console.Write("Enter an integer D: ");
+        bool DisTrue = int.TryParse(Console.ReadLine(), out D);
 
-        if (TryParseInt(input, out result2))
-            Console.WriteLine(divisionByResult);
-
-        int min = int.Parse(Console.ReadLine());
-        int max = int.Parse(Console.ReadLine());
-
-        Console.WriteLine(GenerateRandomNumber(min, max));
+        if (AisTrue && BisTrue && CisTrue && DisTrue)
+        {
+            Console.WriteLine($"\nA > B: Max = {MaxInt(A, B)}, Min = {MinInt(A, B)}");
+            Console.WriteLine($"\nA > B > C: Max = {MaxInt(A, B, C)}, Min = {MinInt(A, B, C)}");
+            Console.WriteLine($"\nA > B > C > D: Max = {MaxInt(A, B, C, D)}, Min = {MinInt(A, B, C, D)}");
+            Console.WriteLine($"\nThe sum of numbers A and B is odd: {TrySumIfOdd(A, B, out result)}, Sum: {result}");
+        }
+        else
+            Console.WriteLine("Invalid value");
 
     }
 }

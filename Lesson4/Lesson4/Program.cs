@@ -1,4 +1,6 @@
-﻿internal class Program
+﻿using System.Diagnostics.Metrics;
+
+internal class Program
 {
     static int MaxInt(int a, int b)
     {
@@ -47,10 +49,20 @@
         return result % 2 != 0;
     }
 
+    // EXTRA
+    static string Repeat(string text, int count)
+    {
+        string result = "";
+        for (int i = 0; i < count; i++)
+            result += text;
+        return result;
+    }
+
     private static void Main(string[] args)
     {
         int result = 0;
         int A = 0, B = 0, C = 0, D = 0;
+
         Console.Write("Enter an integer A: ");
         bool AisTrue = int.TryParse(Console.ReadLine(), out A);
         Console.Write("Enter an integer B: ");
@@ -70,5 +82,17 @@
         else
             Console.WriteLine("Invalid value");
 
+        // EXTRA
+        Console.Write("\nEnter the number of repeats: ");
+        int repeat = 0;
+        bool repeatIsTrue = int.TryParse(Console.ReadLine(), out repeat);
+
+        Console.Write($"Enter a string that is repeated {repeat} times: ");
+        string text = Console.ReadLine();
+
+        if (repeatIsTrue)
+            Console.WriteLine("\n" + Repeat(text, repeat));
+        else
+            Console.WriteLine("Invalid value of repeats");
     }
 }

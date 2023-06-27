@@ -1,41 +1,17 @@
-﻿using Game;
+﻿using Controllers;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
-        SnakeGame snakeGame = SnakeGame.GetSnakeGame(60, 25);
-        snakeGame.SetHeadSneak("O");
-        snakeGame.SetBodySnake("o");
-        snakeGame.SetFood("a");
-        snakeGame.SetFullBodySnake("9");
+        IController controller = new MenuController();
 
-        Task inputTask = Task.Run(() =>
+        while (controller != null)
         {
-            while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                    switch (keyInfo.Key)
-                    {
-                        case ConsoleKey.UpArrow: case ConsoleKey.W: snakeGame.RunUp(); break;
-
-                        case ConsoleKey.DownArrow: case ConsoleKey.S: snakeGame.RunDown(); break;
-
-                        case ConsoleKey.LeftArrow: case ConsoleKey.A: snakeGame.RunLeft(); break;
-
-                        case ConsoleKey.RightArrow: case ConsoleKey.D: snakeGame.RunRight(); break;
-                    }
-                }
-            }
-        });
-        
-        while (true)
-        {
-            Thread.Sleep(10);
-            Console.Clear();
-
-            Console.WriteLine(snakeGame.Go());
+            controller = controller.ExecuteAction();
         }
+
+        Console.WriteLine("\nExecution has ended");
+        Console.ReadLine();
     }
 }

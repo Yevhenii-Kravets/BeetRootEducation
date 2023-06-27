@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Logs;
 
 namespace Game
 {
@@ -23,11 +24,12 @@ namespace Game
     {
         private static SnakeGame _instance;
 
-        private string HeadSnakeSymbol { get; set; }
-        private string BodySnakeSymbol { get; set; }
-        private string FullBodySnakeSymbol { get; set; }
-        private string FoodSymbol { get; set; }
-        private string EmptyCellSymbol { get; set; } = "█";
+        private char HeadSnakeSymbol { get; set; } = 'G';
+        private char BodySnakeSymbol { get; set; } = 'o';
+        private char FullBodySnakeSymbol { get; set; } = 'O';
+        private char FoodSymbol { get; set; } = 'Q';
+        private char EmptyCellSymbol { get; set; } = ' ';
+        private char BarierSymbol { get; set; } = '█';
 
         private Destination Destination { get; set; } = Destination.Right;
         private Cell[,] Grid { get; init; }
@@ -45,17 +47,33 @@ namespace Game
                     else
                         Grid[i, j] = new Cell(CellType.EmptyCell, new Point(i, j));
         }
+
         public static SnakeGame GetSnakeGame(int X, int Y)
         {
             if(_instance == null)
                 _instance = new SnakeGame(X, Y);
             return _instance;
         }
+        public int EndGame()
+        {
+            _instance = null;
+            int count = Snake.GetSnake().GetSnakeBody().Count;
+            int score = count > 2 ? (count - 2) * 100 : 0;
+            Snake.GetSnake().RemoveSnake();
+
+            return score;
+        }
 
         public string Go()
         {
             var grid = SetItemsToGrid();
-            Snake.GetSnake().Run(Destination, grid);
+            var resultRun = Snake.GetSnake().Run(Destination, grid);
+            if (!resultRun)
+            {
+                int score = EndGame();
+                Log.WriteLog(score + "");
+                return "Game Over";
+            }
 
             string result = "";
 
@@ -67,16 +85,16 @@ namespace Game
                 {
                     switch (grid[i, j].GetCellType())
                     {
-                        case CellType.EmptyCell: result += " "; break;
+                        case CellType.EmptyCell: result += EmptyCellSymbol; break;
                         case CellType.Head: result += HeadSnakeSymbol; break;
                         case CellType.Body: result += BodySnakeSymbol; break;
-                        case CellType.Barrier: result += EmptyCellSymbol; break;
+                        case CellType.Barrier: result += BarierSymbol; break;
                         case CellType.Food: result += FoodSymbol; break;
                         case CellType.FullBody: result += FullBodySnakeSymbol; break;
                     }
                 }
             }
-            //result += $"Snake: X:{Snake.GetSnake().GetSnakeBody()[0].GetPosition().X} Y:{Snake.GetSnake().GetSnakeBody()[0].GetPosition().Y}";
+            
             return result;
         }
         public Cell[,] SetItemsToGrid()
@@ -93,23 +111,24 @@ namespace Game
             return newGrid;
         }
 
-        public void SetHeadSneak(string symbol)
+        public void SetHeadSneak(char symbol)
         {
             this.HeadSnakeSymbol = symbol;
         }
-        public void SetBodySnake(string symbol)
+        public void SetBodySnake(char symbol)
         {
             this.BodySnakeSymbol = symbol;
         }
-        public void SetFullBodySnake(string symbol)
+        public void SetFullBodySnake(char symbol)
         {
             this.FullBodySnakeSymbol = symbol;
         }
-        public void SetFood(string symbol)
+        public void SetFood(char symbol)
         {
             this.FoodSymbol = symbol;
         }
-        public void SetEmptyCell(string symbol)
+        public void SetEmptyCell(char symbol)
+
         {
             this.EmptyCellSymbol = symbol;
         }
@@ -134,5 +153,6 @@ namespace Game
             if (Destination != Destination.Left)
                 Destination = Destination.Right;
         }
+
     }
 }

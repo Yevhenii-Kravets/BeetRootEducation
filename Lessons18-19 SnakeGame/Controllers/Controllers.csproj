@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Game\Game.csproj" />
+    <ProjectReference Include="..\Logs\Logs.csproj" />
+  </ItemGroup>
+
 </Project>

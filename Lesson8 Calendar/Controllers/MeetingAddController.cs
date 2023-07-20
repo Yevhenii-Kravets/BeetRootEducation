@@ -10,7 +10,7 @@ namespace Controllers
 
             var calendar = Calendar.GetInstance();
 
-            if(calendar.GetRooms().Count <= 0)
+            if (calendar.GetRooms().Count <= 0)
             {
                 Console.WriteLine("First add the room");
                 Console.ReadLine();
@@ -62,7 +62,7 @@ namespace Controllers
 
             Console.WriteLine("\nEnter duration in minutes:");
             TimeSpan duration;
-            if(int.TryParse(Console.ReadLine(), out int minutes))
+            if (int.TryParse(Console.ReadLine(), out int minutes))
                 duration = new TimeSpan(0, minutes, 0);
             else
             {
@@ -81,7 +81,7 @@ namespace Controllers
             }
 
             foreach (var meeting in calendar.GetMeetings())
-                if (room == meeting.Room.Name &&  date < meeting.StartTime + meeting.Duration && date + duration > meeting.StartTime) 
+                if (room == meeting.Room.Name && date < meeting.StartTime + meeting.Duration && date + duration > meeting.StartTime)
                 {
                     Console.WriteLine("The room is busy at this time");
                     Console.ReadLine();

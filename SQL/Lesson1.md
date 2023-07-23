@@ -6,6 +6,6 @@
 SELECT * FROM Persons 
 WHERE Gender = 'M';
 
-<img src="l1sam.png" alt="result">
+![result](l1sam.png)
 
----
+`---`

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test forms</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/sketchy/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="row">
+
+    <!-- registration form -->
+    <form class="col">
+        <div class="modal-dialog-centered">
+            <div id="formContent">
+                <div id="formHeader">
+                    <h4 style="margin-left:35%">Registration</h4>
+                </div>
+                <div id="formBody" class="bg-info card" style="padding:1%">
+                    <div class="row">
+                        <div class="col">
+                            Name:
+                            <input type="text" id="inputName" class="form-control">
+                        </div>
+                        <div class="col">
+                            Surname
+                            <input type="text" id="inputSurname" class="form-control">
+                        </div>
+                    </div>
+                    Birthday:
+                    <input type="date" id="inputBirthday" class="form-control">
+                    E-mail:
+                    <input type="email" id="inputEmail" class="form-control">
+                    Password:
+                    <input type="password" id="inputPassword" class="form-control">
+                </div>
+
+                <div id="formFooter" style="padding-top:1%">
+                    <input type="submit" class="btn btn-success" style="width:50%; margin-left:25%" value="Registration" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- login form -->
+    <form class="col">
+        <div class="modal-dialog-centered">
+            <div id="formContent">
+                <div id="formHeader">
+                    <h4 style="margin-left:35%">Login</h4>
+                </div>
+                <div id="formBody" class="bg-warning card" style="padding:1%;">
+                    E-mail:
+                    <input type="email" id="inputEmail" class="form-control">
+                    Password:
+                    <input type="password" id="inputPassword" class="form-control">
+                </div>
+                <div id="formFooter" style="padding-top:1%">
+                    <input type="submit" class="btn btn-success" style="width:50%; margin-left:25%" value="Log in" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- question form -->
+    <form class="col">
+        <div class="modal-dialog-centered">
+            <div id="formContent">
+                <div id="formHeader">
+                    <h4 style="margin-left:35%">Question</h4>
+                </div>
+                <div id="formBody" class="text-white bg-secondary card" style="padding:1%;">
+                    <div class="row">
+                        <div class="col">
+                            Name:
+                            <input type="text" id="inputName" class="form-control">
+                        </div>
+                        <div class="col">
+                            Surname
+                            <input type="text" id="inputSurname" class="form-control">
+                        </div>
+                    </div>
+                    E-mail:
+                    <input type="email" id="inputEmail" class="form-control">
+                    Text:
+                    <textarea class="form-control" id="inputQuestion" rows="3"></textarea>
+                </div>
+                <div id="formFooter" style="padding-top:1%">
+                    <input type="submit" class="btn btn-success" style="width:50%; margin-left:25%" value="Send" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- make an order form -->
+    <form class="col">
+        <div class="modal-dialog-centered">
+            <div id="formContent">
+                <div id="formHeader">
+                    <h4 style="margin-left:35%">Make an order</h4>
+                </div>
+                <div id="formBody" class="bg-light card" style="padding:1%;">
+                    <div class="row">
+                        <div class="col">
+                            Name:
+                            <input type="text" id="inputName" class="form-control">
+                        </div>
+                        <div class="col">
+                            Surname
+                            <input type="text" id="inputSurname" class="form-control">
+                        </div>
+                    </div>
+                    E-mail:
+                    <input type="email" id="inputEmail" class="form-control">
+                    Number:
+                    <input type="number" id="inputPhone" class="form-control">
+                    Address:
+                    <input type="text" id="inputPhone" class="form-control">
+                    <div class="row">
+                        <div class="col-2">
+                            Post:
+                            <select class="custom-select breadcrumb">
+                                <option value="1">Nova post</option>
+                                <option value="2">Ukrpostа</option>
+                            </select>
+                        </div>
+                        <div class="col-3" style="margin-left:20%">
+                            Courier
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="inputCourier" 
+                                       style="margin-left:20%; margin-bottom:5%">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            Under the door
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="inputDoor" disabled
+                                       style="margin-left:30%; margin-bottom:5%">
+                            </div>
+                        </div>
+                        <script>
+                            var buttonSignin = document.getElementById('inputCourier');
+                            buttonSignin.addEventListener('click', function () {
+                                if (document.getElementById('inputCourier').checked) {
+                                    document.getElementById('inputDoor').disabled = false;
+                                } else {
+                                    document.getElementById('inputDoor').checked = false;
+                                    document.getElementById('inputDoor').disabled = true;
+                                }
+                                document.getElementById('inputCourier')
+                            });
+                        </script>
+                    </div>
+                    <div class="row">
+                        <input type="checkbox" class="custom-control-input col-1" id="inputDoor" style="margin-left: 5%; margin-top: 1%">
+                        call back to confirm
+                    </div>
+                </div>
+                <div id="formFooter" class="row" style="padding: 20%; padding-top: 1%; padding-bottom: 0; ">
+                    <input type="submit" class="btn btn-success col" value="Order" />
+                    <input type="submit" class="btn btn-danger col" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

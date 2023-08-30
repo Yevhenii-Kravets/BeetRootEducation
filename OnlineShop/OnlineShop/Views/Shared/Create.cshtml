@@ -1,0 +1,33 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "CreateProduct";
+}
+
+<form class="form-group" asp-action="Create" method="post">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create product</h5>
+            </div>
+            <div class="modal-body">
+                ID:
+                <input id="inputTextID" type="number" class="form-control" asp-for="Id"/>
+                Name:
+                <input id="inputTextName" type="text" class="form-control" asp-for="Name" />
+                Grade:
+                <input id="inputTextDescription" type="text" class="form-control" asp-for="Description"/>
+                Supplier:
+                <input id="inputTextSupplier" type="text" class="form-control" asp-for="Supplier" />
+                Country:
+                <input id="inputTextCountry" type="text" class="form-control" asp-for="CountryOrigin" />
+                Link to photo:
+                <input id="inputTextPhoto" type="text" class="form-control" asp-for="Photo" />
+                Price:
+                <input id="inputTextPrice" type="text" class="form-control" asp-for="Price" />
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</form>

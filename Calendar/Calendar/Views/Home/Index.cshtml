@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="col-md-3">
+
+    <div class="btn-group col-md-4 offset-md-4">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+            </svg>
+            Create
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCreateEvent">Event</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCreateTask">Task</a></li>
+        </ul>
+    </div>
+
+    <div id="datepicker" style="margin-top:7%; margin-left: 10%;" class="col-md-12">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    </div>
+
+
+</div>
+
+<div class="col-md-9">
+
+    <div id="calendar" style="width:100%">
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+        <script type="module" src="~/js/calendars.js?v=3"></script>
+        <script>
+            $(document).ready(function () {
+                $('.fc-button').each(function () {
+                    $(this).removeClass();
+                    $(this).addClass('btn btn-outline-primary');
+                });
+            });
+        </script>
+    </div>
+
+</div>
+
+@await Html.PartialAsync("/Views/Content/ModalViews/ModalCreateTask.cshtml")
+@await Html.PartialAsync("/Views/Content/ModalViews/ModalCreateEvent.cshtml")
+
+@await Html.PartialAsync("/Views/Content/ModalViews/ModalInfoTask.cshtml")
+@await Html.PartialAsync("/Views/Content/ModalViews/ModalInfoEvent.cshtml")
+
+@await Html.PartialAsync("/Views/Content/ModalViews/ModalUpdateTask.cshtml")
+@await Html.PartialAsync("/Views/Content/ModalViews/ModalUpdateEvent.cshtml")
+
+<script type="module" src="~/js/helper.js?v=2" asp-append-version="true"></script>
+<script type="module" src="~/js/requests.js?v=1" asp-append-version="true"></script>
+<script type="module" src="~/js/SETTINGS.js?v=1" asp-append-version="true"></script>

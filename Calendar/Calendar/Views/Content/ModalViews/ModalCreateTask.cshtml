@@ -1,0 +1,39 @@
+﻿    <div class="modal" id="modalCreateTask">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Create task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body row">
+
+                        <div class="form-group col-md-2">
+                            <input type="color" id="colorTaskDot" class="form-control h-100 border-secondary">
+                        </div>
+                        <div class="form-group col-md-10">
+                            <input type="text" class="form-control border-secondary" placeholder="Add title" id="inputTaskTitle">
+                            <div class="invalid-feedback" id="labelTaskTitle"></div>
+                        </div>
+
+                    <div class="form-group col-md-12 mt-2">
+                        <textarea type="text" class="form-control border-secondary" id="inputTaskDescription" placeholder="Add description" rows="3"></textarea>
+                    </div>
+
+
+                    <div class="form-group col-md-6 mt-2">
+                        <input type="datetime-local" id="datetimeTaskStart" class="form-control border-secondary">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button id="buttonRequestCreateTask" class="btn btn-success">Create</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script type="module" src="~/js/modalViews/modalCreateTask.js?v=1" asp-append-version="true"></script>

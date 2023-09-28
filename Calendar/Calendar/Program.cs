@@ -2,7 +2,8 @@ using BuisnessLogic;
 using BuisnessLogic.Interfaces;
 using BuisnessLogic.Services;
 using Calendar.Filters;
-using Microsoft.AspNetCore.Localization;
+using Calendar.Models;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Serilog;
@@ -75,5 +76,8 @@ internal class Program
                 "Integrated Security=true;" +
                 "MultipleActiveResultSets=true;");
         });
+
+        services.AddScoped<IValidator<TaskRequestModel>, TaskRequestModelValidator>();
+        services.AddScoped<IValidator<EventRequestModel>, EventRequestModelValidator>();
     }
 }

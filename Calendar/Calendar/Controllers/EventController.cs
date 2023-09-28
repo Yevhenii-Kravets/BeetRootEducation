@@ -1,6 +1,10 @@
-﻿using BuisnessLogic.Interfaces;
+﻿using BuisnessLogic;
+using BuisnessLogic.Interfaces;
+using Calendar.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using System.Threading.Tasks;
 
 namespace Calendar.Controllers
 {
@@ -8,11 +12,13 @@ namespace Calendar.Controllers
     {
         private readonly ILogger<EventController> _logger;
         private readonly IServiceItem<Event> _service;
+        private readonly IValidator<EventRequestModel> _validator;
 
-        public EventController(ILogger<EventController> logger, IServiceItem<Event> service)
+        public EventController(ILogger<EventController> logger, CalendarDbContext calendar, IServiceItem<Event> service, IValidator<EventRequestModel> validator)
         {
             _logger = logger;
             _service = service;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -24,8 +30,10 @@ namespace Calendar.Controllers
         [HttpGet]
         public IActionResult Range(DateTime startDate, DateTime endDate)
         {
-            var events = _service.GetInRange(startDate, endDate);
+            if (endDate > startDate)
+                return Json(new { success = false, error = "Start date is less than end date" });
 
+            var events = _service.GetInRange(startDate, endDate);
             return Ok(events);
         }
 
@@ -49,14 +57,56 @@ namespace Calendar.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Event @event)
+        public IActionResult Create([FromBody] EventRequestModel @event)
         {
+            var validation = _validator.Validate(@event);
+            if (!validation.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                              .Select(e => e.ErrorMessage)
+                                              .ToList();
+
+                return Json(new { success = false, validation.Errors });
+            }
             try
             {
                 if (@event == null)
                     return Json(new { success = false });
 
-                var result = _service.Create(@event);
+                var theme = new EventTheme()
+                {
+                    Name = @event.Theme.Name,
+                    BackgroundColor = @event.Theme.BackgroundColor,
+                    TextColor = @event.Theme.TextColor
+                };
+
+                var repeat = new EventRepeat()
+                {
+                    RepeatsCount = @event.Repeat.RepeatsCount,
+
+                    Monday = @event.Repeat.Monday,
+                    Tuesday = @event.Repeat.Tuesday,
+                    Wednesday = @event.Repeat.Tuesday,
+                    Thursday = @event.Repeat.Thursday,
+                    Friday = @event.Repeat.Friday,
+                    Saturday = @event.Repeat.Saturday,
+                    Sunday = @event.Repeat.Sunday,
+
+                    Day = @event.Repeat.Day,
+                    Week = @event.Repeat.Week,
+                    Month = @event.Repeat.Month,
+                    Year = @event.Repeat.Year,
+                };
+
+                var result = _service.Create(new Event()
+                {
+                    Title = @event.Title,
+                    Description = @event.Description,
+                    StartDate = @event.StartDate,
+                    EndDate = @event.EndDate,
+                    Theme = theme,
+                    Repeat = repeat
+                });
                 _logger.LogInformation($"Add event [{result}]");
 
                 return Json(new { success = result });
@@ -69,15 +119,57 @@ namespace Calendar.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Guid id, [FromBody] Event @event)
+        public IActionResult Edit(Guid id, [FromBody] EventRequestModel @event)
         {
+            var validation = _validator.Validate(@event);
+            if (!validation.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                              .Select(e => e.ErrorMessage)
+                                              .ToList();
+
+                return Json(new { success = false, validation.Errors });
+            }
             try
             {
                 if (@event == null)
                     return Json(new { success = false });
 
-                @event.Id = id;
-                var result = _service.Update(@event);
+                var theme = new EventTheme()
+                {
+                    Name = @event.Theme.Name,
+                    BackgroundColor = @event.Theme.BackgroundColor,
+                    TextColor = @event.Theme.TextColor
+                };
+
+                var repeat = new EventRepeat()
+                {
+                    RepeatsCount = @event.Repeat.RepeatsCount,
+
+                    Monday = @event.Repeat.Monday,
+                    Tuesday = @event.Repeat.Tuesday,
+                    Wednesday = @event.Repeat.Tuesday,
+                    Thursday = @event.Repeat.Thursday,
+                    Friday = @event.Repeat.Friday,
+                    Saturday = @event.Repeat.Saturday,
+                    Sunday = @event.Repeat.Sunday,
+
+                    Day = @event.Repeat.Day,
+                    Week = @event.Repeat.Week,
+                    Month = @event.Repeat.Month,
+                    Year = @event.Repeat.Year,
+                };
+
+                var result = _service.Update(new Event()
+                {
+                    Id = id,
+                    Title = @event.Title,
+                    Description = @event.Description,
+                    StartDate = @event.StartDate,
+                    EndDate = @event.EndDate,
+                    Theme = theme,
+                    Repeat = repeat
+                });
                 _logger.LogInformation($"Update event [{result}]");
 
                 return Json(new { success = result });
@@ -105,8 +197,6 @@ namespace Calendar.Controllers
             }
             return Json(new { success = false });
         }
-
-
 
     }
 }

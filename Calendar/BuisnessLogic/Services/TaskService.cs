@@ -1,4 +1,6 @@
 ﻿using BuisnessLogic.Interfaces;
+using Microsoft.Extensions.Logging;
+using Models;
 using Task = Models.Task;
 
 namespace BuisnessLogic.Services
@@ -27,9 +29,12 @@ namespace BuisnessLogic.Services
         public Guid Create(Task t)
         {
             if (_calendar.Tasks.FirstOrDefault(ts => ts.Id == t.Id) != null)
+            {
                 throw new InvalidOperationException($"Creation failed. Item with ID {t.Id} is found.");
 
-            _calendar.Tasks.Add(t);
+            }
+
+                _calendar.Tasks.Add(t);
 
             var result = _calendar.SaveChanges();
 
@@ -68,5 +73,16 @@ namespace BuisnessLogic.Services
 
             return id;
         }
+
+        public Task Details(Guid id)
+        {
+            var task = _calendar.Tasks.FirstOrDefault(e => e.Id == id);
+
+            if (task == null)
+                throw new InvalidOperationException($"Error. Item with ID {id} not found.");
+
+            return task;
+        }
+
     }
 }

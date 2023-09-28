@@ -100,7 +100,13 @@ namespace BuisnessLogic.Services
 
         public Event Details(Guid id)
         {
-            var @event = _calendar.Events.FirstOrDefault(e => e.Id == id);
+            var @event = _calendar.Events
+                .Include(e => e.Repeat)
+                .Include(e => e.Theme)
+                .FirstOrDefault(e => e.Id == id);
+
+            if (@event == null)
+                throw new InvalidOperationException($"Error. Item with ID {id} not found.");
 
             return @event;
         }

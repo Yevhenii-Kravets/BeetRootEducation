@@ -7,5 +7,6 @@
         public Guid Create(T item);
         public Guid Update(T item);
         public Guid Delete(Guid id);
+        public T Details(Guid id);
     }
 }

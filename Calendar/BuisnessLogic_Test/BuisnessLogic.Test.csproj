@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BuisnessLogic\BuisnessLogic.csproj" />
+    <ProjectReference Include="..\Calendar\Calendar.csproj" />
   </ItemGroup>
 
 </Project>

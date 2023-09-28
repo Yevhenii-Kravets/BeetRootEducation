@@ -1,7 +1,6 @@
 ﻿using BuisnessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using System.Threading.Tasks;
 
 namespace Calendar.Controllers
 {
@@ -33,46 +32,78 @@ namespace Calendar.Controllers
         [HttpGet]
         public IActionResult Details(Guid id)
         {
-            var @event = _service.GetAll().FirstOrDefault(e => e.Id == id);
+            try
+            {
+                var @event = _service.Details(id);
 
-            if (@event == null)
-                return Json(new { success = false });
-            else
-                return Ok(@event);
+                if (@event == null)
+                    return Json(new { success = false });
+                else
+                    return Ok(@event);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: details [{e}]");
+            }
+            return Json(new { success = false });
         }
 
         [HttpPost]
         public IActionResult Create([FromBody] Event @event)
         {
-            if (@event == null)
-                return Json(new { success = false });
+            try
+            {
+                if (@event == null)
+                    return Json(new { success = false });
 
-            var result = _service.Create(@event);
-            _logger.LogInformation($"Add event {result}");
+                var result = _service.Create(@event);
+                _logger.LogInformation($"Add event [{result}]");
 
-            return Json(new { success = result });
+                return Json(new { success = result });
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: add event [{e}]");
+            }
+            return Json(new { success = false });
         }
 
         [HttpPost]
         public IActionResult Edit(Guid id, [FromBody] Event @event)
         {
-            if (@event == null)
-                return Json(new { success = false });
+            try
+            {
+                if (@event == null)
+                    return Json(new { success = false });
 
-            @event.Id = id;
-            var result = _service.Update(@event);
-            _logger.LogInformation($"Update event {result}");
+                @event.Id = id;
+                var result = _service.Update(@event);
+                _logger.LogInformation($"Update event [{result}]");
 
-            return Json(new { success = result });
+                return Json(new { success = result });
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: update event [{e}]");
+            }
+            return Json(new { success = false });
         }
 
         [HttpPost]
         public IActionResult Delete(Guid id)
         {
-            var result = _service.Delete(id);
-            _logger.LogInformation($"Delete event {result}");
+            try
+            {
+                var result = _service.Delete(id);
+                _logger.LogInformation($"Delete event [{result}]");
 
-            return Json(new { success = result });
+                return Json(new { success = result });
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: remove event [{e}]");
+            }
+            return Json(new { success = false });
         }
 
 

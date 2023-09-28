@@ -25,53 +25,84 @@ namespace Calendar.Controllers
         public IActionResult Range(DateTime startDate, DateTime endDate) 
         {
             var tasks = _service.GetInRange(startDate, endDate);
-
             return Ok(tasks);
         }
 
         [HttpGet]
         public IActionResult Details(Guid id)
         {
-            var task = _service.GetAll().FirstOrDefault(t => t.Id == id);
+            try
+            {
+                var task = _service.Details(id);
 
-            if (task == null)
-                return Json(new { success = false });
-            else
-                return Ok(task);
+                if (task == null)
+                    return Json(new { success = false });
+                else
+                    return Ok(task);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: details [{e}]");
+            }
+            return Json(new { success = false });
         }
 
         [HttpPost]
         public IActionResult Create([FromBody] Task task)
         {
-            if (task == null)
-                return Json(new { success = false });
+            try
+            {
+                if (task == null)
+                    return Json(new { success = false });
 
-            var result = _service.Create(task);
-            _logger.LogInformation($"Add task {result}");
+                var result = _service.Create(task);
 
-            return Json(new { success = result });
+                _logger.LogInformation($"Add task [{result}]");
+
+                return Json(new { success = result });
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: add task [{e}]");
+            }
+            return Json(new { success = false});
         }
 
         [HttpPost]
         public IActionResult Edit(Guid id, [FromBody] Task task)
         {
-            if (task == null)
-                return Json(new { success = false });
-         
-            task.Id = id;
-            var result = _service.Update(task);
-            _logger.LogInformation($"Update task {result}");
+            try
+            {
+                if (task == null)
+                    return Json(new { success = false });
 
-            return Json(new { success = result });
+                task.Id = id;
+                var result = _service.Update(task);
+                _logger.LogInformation($"Update task [{result}]");
+
+                return Json(new { success = result });
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: update task [{e}]");
+            }
+            return Json(new { success = false });
         }
 
         [HttpPost]
         public IActionResult Delete(Guid id)
         {
-            var result = _service.Delete(id);
-            _logger.LogInformation($"Delete task {result}");
+            try
+            {
+                var result = _service.Delete(id);
+                _logger.LogInformation($"Delete task [{result}]");
 
-            return Json(new { success = result });
+                return Json(new { success = result });
+            } catch (Exception e)
+            {
+                _logger.LogInformation($"Operation error: remove task [{e}]");
+            }
+            return Json(new { success = false });
         }
     }
 }

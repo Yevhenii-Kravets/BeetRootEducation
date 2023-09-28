@@ -30,7 +30,7 @@ namespace Calendar.Controllers
         [HttpGet]
         public IActionResult Range(DateTime startDate, DateTime endDate) 
         {
-            if(endDate > startDate)
+            if(endDate < startDate)
                 return Json(new { success = false, error = "Start date is less than end date" });
 
             var tasks = _service.GetInRange(startDate, endDate);

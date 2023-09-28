@@ -1,6 +1,13 @@
 using BuisnessLogic;
+using BuisnessLogic.Interfaces;
+using BuisnessLogic.Services;
 using Calendar.Filters;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Models;
+using Serilog;
+using Serilog.Events;
+using Task = Models.Task;
 
 internal class Program
 {
@@ -9,12 +16,26 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddControllersWithViews();
+        var logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .Enrich.FromLogContext()
+            .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
+            .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Information)
+            .CreateLogger();
+        builder.Logging.ClearProviders();
+        builder.Logging.AddSerilog(logger);
+
+
+        //builder.Services.AddControllersWithViews();
 
         builder.Services.AddControllersWithViews(options =>
         {
             options.Filters.Add<ExceptionFilter>();
         });
+
+       
+        builder.Services.AddScoped<IServiceItem<Task>, TaskService>();
+        builder.Services.AddScoped<IServiceItem<Event>, EventService>();
 
         ConfigureServices(builder.Services, builder.Configuration);
 
@@ -47,7 +68,12 @@ internal class Program
     {
         services.AddDbContext<CalendarDbContext>(options =>
         {
-            options.UseInMemoryDatabase("CalendarDbContext");
+            //options.UseInMemoryDatabase("CalendarDbContext");
+            options.UseSqlServer("Server=localhost;" +
+                "Database=FPCalendarDB;" +
+                "TrustServerCertificate=True;" +
+                "Integrated Security=true;" +
+                "MultipleActiveResultSets=true;");
         });
     }
 }

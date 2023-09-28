@@ -1,6 +1,4 @@
-﻿using BuisnessLogic;
-using BuisnessLogic.Services;
-using Calendar.Models;
+﻿using BuisnessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Task = Models.Task;
 
@@ -9,103 +7,71 @@ namespace Calendar.Controllers
     public class TaskController : Controller
     {
         private readonly ILogger<TaskController> _logger;
-        private readonly TaskServices _services;
+        private readonly IServiceItem<Task> _service;
 
-        public TaskController(ILogger<TaskController> logger, CalendarDbContext calendar)
+        public TaskController(ILogger<TaskController> logger, IServiceItem<Task> service)
         {
             _logger = logger;
-            _services = new TaskServices(calendar);
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new TaskGetRequestModel();
-            var tasks = _services.GetAllTasks();
+            return Ok(_service.GetAll());
+        }
 
-            model.Tasks = tasks.Select(task => new TaskGetRequestModel.TaskModel
-            {
-                Id = task.Id,
-                Title = task.Title,
-                Description = task.Description,
-                Date = task.Date,
-                Color = task.Color
-            });
+        [HttpGet]
+        public IActionResult Range(DateTime startDate, DateTime endDate) 
+        {
+            var tasks = _service.GetInRange(startDate, endDate);
 
-            return Ok(model.Tasks);
+            return Ok(tasks);
         }
 
         [HttpGet]
         public IActionResult Details(Guid id)
         {
-            var task = _services.GetAllTasks().FirstOrDefault(t => t.Id == id);
+            var task = _service.GetAll().FirstOrDefault(t => t.Id == id);
 
-            var result = new TaskGetRequestModel.TaskModel
-            {
-                Id = task.Id,
-                Title = task.Title,
-                Description = task.Description,
-                Date = task.Date,
-                Color = task.Color
-            };
-            return Ok(result);
+            if (task == null)
+                return Json(new { success = false });
+            else
+                return Ok(task);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] TaskPostRequestModel.TaskModel task)
+        public IActionResult Create([FromBody] Task task)
         {
-            if (task != null)
-            {
-                if (string.IsNullOrWhiteSpace(task.Title))
-                    return Json(new { success = false });
-
-                _services.CreateTask(new Task
-                {
-                    Id = Guid.NewGuid(),
-                    Title = task.Title,
-                    Description = task.Description,
-                    Color = task.Color,
-                    Date = task.Date
-                });
-
-                return Json(new { success = true });
-            }
-            else
-            {
+            if (task == null)
                 return Json(new { success = false });
-            }
+
+            var result = _service.Create(task);
+            _logger.LogInformation($"Add task {result}");
+
+            return Json(new { success = result });
         }
 
         [HttpPost]
-        public IActionResult Edit(Guid id, [FromBody] TaskPostRequestModel.TaskModel task)
+        public IActionResult Edit(Guid id, [FromBody] Task task)
         {
-            if (task != null)
-            {
-                if (string.IsNullOrWhiteSpace(task.Title))
-                    return Json(new { success = false });
-
-                _services.UpdateTask(new Task
-                {
-                    Id = id,
-                    Title = task.Title,
-                    Description = task.Description,
-                    Date = task.Date,
-                    Color = task.Color
-                });
-                return Json(new { success = true });
-
-            }
-            else
+            if (task == null)
                 return Json(new { success = false });
+         
+            task.Id = id;
+            var result = _service.Update(task);
+            _logger.LogInformation($"Update task {result}");
+
+            return Json(new { success = result });
         }
 
         [HttpPost]
         public IActionResult Delete(Guid id)
         {
-            if (_services.DeleteTask(id))
-                return Json(new { success = true });
-            else
-                return Json(new { success = false });
+            var result = _service.Delete(id);
+            _logger.LogInformation($"Delete task {result}");
+
+            return Json(new { success = result });
         }
     }
 }

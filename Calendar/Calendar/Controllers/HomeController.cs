@@ -1,7 +1,7 @@
-﻿using BuisnessLogic;
-using Calendar.Models;
+﻿using Calendar.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BuisnessLogic;
 
 namespace Calendar.Controllers
 {

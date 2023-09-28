@@ -14,7 +14,7 @@ namespace Calendar.Filters
         public void OnException(ExceptionContext context)
         {
             var request = context.HttpContext.Request;
-            _logger.Log(LogLevel.Error, context.Exception, $"Error happend during request {request.Path}...");
+            //_logger.Log(LogLevel.Error, context.Exception, $"Error happend during request {request.Path}...");
         }
     }
 }

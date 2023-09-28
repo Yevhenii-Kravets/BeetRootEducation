@@ -1,14 +1,14 @@
 ﻿namespace Models
 {
-    public class Repeat
+    public class EventRepeat
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public int RepeatsCount { get; set; }
 
         public bool Monday { get; set; }
         public bool Tuesday { get; set; }
         public bool Wednesday { get; set; }
-        public bool Thursday { get; set;}
+        public bool Thursday { get; set; }
         public bool Friday { get; set; }
         public bool Saturday { get; set; }
         public bool Sunday { get; set; }

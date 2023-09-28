@@ -27,26 +27,19 @@
                 <div class="btn-group col-md-6 mt-2">
                     <button type="button" class="btn btn-outline-secondary col-md-10" id="inputEventTheme"
                             data-bs-toggle="collapse" data-bs-target="#collapseEventTheme" aria-expanded="false" aria-controls="collapseEventTheme">
-                        Default
+                        Other
                     </button>
                     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split col-md-2" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" onclick="ClickTheme(this)">Default</a></li>
+                        <li><a class="dropdown-item">Birthday</a></li>
+                        <li><a class="dropdown-item">Holiday</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" onclick="ClickTheme(this)">Birthday</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" onclick="ClickTheme(this)"
-                           data-bs-toggle="collapse" data-bs-target="#collapseEventTheme" aria-expanded="false" aria-controls="collapseEventTheme">Other</a>
+                        <li><a class="dropdown-item">Other</a>
                     </li>
                     </ul>
                 </div>
-                <script>
-                    function ClickTheme(item) {
-                        document.getElementById('inputEventTheme').innerHTML = item.textContent;
-                    }
-                </script>
 
                 <div class="form-group col-md-6 mt-2">
                     <button type="button" class="btn btn-outline-secondary col-md-12"
@@ -99,7 +92,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="buttonRequestCreateEvent" class="btn btn-success">Create</button>
+                <button id="buttonRequestCreateEvent" class="btn btn-success">Add</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

@@ -13,8 +13,8 @@
             Create
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCreateEvent">Event</a></li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCreateTask">Task</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCreateEvent" id="buttonShowModalCreateEvent">Event</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCreateTask" id="buttonShowModalCreateTask">Task</a></li>
         </ul>
     </div>
 
@@ -31,7 +31,7 @@
 
     <div id="calendar" style="width:100%">
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-        <script type="module" src="~/js/calendars.js?v=3"></script>
+        <script type="module" src="~/js/calendars.js?v=5"></script>
         <script>
             $(document).ready(function () {
                 $('.fc-button').each(function () {
@@ -53,6 +53,6 @@
 @await Html.PartialAsync("/Views/Content/ModalViews/ModalUpdateTask.cshtml")
 @await Html.PartialAsync("/Views/Content/ModalViews/ModalUpdateEvent.cshtml")
 
-<script type="module" src="~/js/helper.js?v=2" asp-append-version="true"></script>
-<script type="module" src="~/js/requests.js?v=1" asp-append-version="true"></script>
+<script type="module" src="~/js/helper.js?v=3" asp-append-version="true"></script>
+<script type="module" src="~/js/requests.js?v=5" asp-append-version="true"></script>
 <script type="module" src="~/js/SETTINGS.js?v=1" asp-append-version="true"></script>

@@ -1,0 +1,105 @@
+﻿<div class="modal" id="modalUpdateEvent">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body row">
+
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control border-secondary" id="inputEventTitleUpdate" placeholder="Add title">
+                    <div class="invalid-feedback" id="labelEventTitleUpdate"></div>
+                </div>
+
+                <div class="form-group col-md-12 mt-2">
+                    <textarea type="text" class="form-control border-secondary" id="inputEventDescriptionUpdate" rows="3" placeholder="Add description"></textarea>
+                </div>
+
+
+                <div class="form-group col-md-6 mt-2">
+                    <input type="datetime-local" id="datetimeEventStartUpdate" class="form-control border-secondary">
+                </div>
+                <div class="form-group col-md-6 mt-2">
+                    <input type="datetime-local" id="datetimeEventEndUpdate" class="form-control border-secondary">
+                </div>
+
+                <div class="btn-group col-md-6 mt-2">
+                    <button type="button" class="btn btn-outline-secondary col-md-10" id="inputEventThemeUpdate"
+                            data-bs-toggle="collapse" data-bs-target="#collapseEventThemeUpdate" aria-expanded="false" 
+                            aria-controls="collapseEventThemeUpdate">Default</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split col-md-2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" onclick="ClickTheme(this)">Default</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" onclick="ClickTheme(this)">Birthday</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" onclick="ClickTheme(this)"
+                               data-bs-toggle="collapse" data-bs-target="#collapseEventThemeUpdate" aria-expanded="false" aria-controls="collapseEventThemeUpdate">Other</a>
+                        </li>
+                    </ul>
+                </div>
+                <script>
+                    function ClickTheme(item) {
+                        document.getElementById('inputEventThemeUpdate').innerHTML = item.textContent;
+                    }
+                </script>
+
+                <div class="form-group col-md-6 mt-2">
+                    <button type="button" class="btn btn-outline-secondary col-md-12"
+                            data-bs-toggle="collapse" data-bs-target="#collapseEventRepeatUpdate" aria-expanded="false" aria-controls="collapseEventRepeatUpdate">
+                        Repeat
+                    </button>
+                </div>
+
+                <div class="collapse row" id="collapseEventThemeUpdate">
+                    <div class="form-group col-md-6">
+                        <label for="colorEventTypeBackgroundUpdate">Background</label>
+                        <input type="color" id="colorEventTypeBackgroundUpdate" class="form-control border-secondary">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="colorEventTypeTextUpdate">Text</label>
+                        <input type="color" id="colorEventTypeTextUpdate" class="form-control border-secondary">
+                    </div>
+                </div>
+
+                <div class="collapse row" id="collapseEventRepeatUpdate">
+                    <div class="btn-group col-md-12 mt-2" role="group">
+                        <input type="checkbox" class="btn-check" id="checkMonUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkMonUpdate">Mon</label>
+                        <input type="checkbox" class="btn-check" id="checkTueUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkTueUpdate">Tue</label>
+                        <input type="checkbox" class="btn-check" id="checkWedUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkWedUpdate">Wed</label>
+                        <input type="checkbox" class="btn-check" id="checkThuUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkThuUpdate">Thu</label>
+                        <input type="checkbox" class="btn-check" id="checkFriUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkFriUpdate">Fri</label>
+                        <input type="checkbox" class="btn-check" id="checkSatUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkSatUpdate">Sat</label>
+                        <input type="checkbox" class="btn-check" id="checkSunUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkSunUpdate">Sun</label>
+                    </div>
+                    <div class="btn-group col-md-8 mt-2" role="group">
+                        <input type="checkbox" class="btn-check" id="checkDayUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkDayUpdate">Day</label>
+                        <input type="checkbox" class="btn-check" id="checkWeekUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkWeekUpdate">Week</label>
+                        <input type="checkbox" class="btn-check" id="checkMonthUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkMonthUpdate">Month</label>
+                        <input type="checkbox" class="btn-check" id="checkYearUpdate" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkYearUpdate">Year</label>
+                    </div>
+                    <div class="form-group col-md-4 mt-2">
+                        <input type="number" class="form-control border-secondary" id="inputNumberCountUpdate" placeholder="Repeats">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="buttonRequestUpdateEvent" class="btn btn-success">Update</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="~/js/modalViews/modalUpdateEvent.js?v=3" asp-append-version="true"></script>

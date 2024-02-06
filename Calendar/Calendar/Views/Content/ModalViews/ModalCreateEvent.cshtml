@@ -1,0 +1,102 @@
+﻿<div class="modal" id="modalCreateEvent">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Create event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body row">
+
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control border-secondary" id="inputEventTitle" placeholder="Add title">
+                    <div class="invalid-feedback" id="labelEventTitle"></div>
+                </div>
+
+                <div class="form-group col-md-12 mt-2">
+                    <textarea type="text" class="form-control border-secondary" id="inputEventDescription" rows="3" placeholder="Add description"></textarea>
+                </div>
+
+
+                <div class="form-group col-md-6 mt-2">
+                    <input type="datetime-local" id="datetimeEventStart" class="form-control border-secondary">
+                </div>
+                <div class="form-group col-md-6 mt-2">
+                    <input type="datetime-local" id="datetimeEventEnd" class="form-control border-secondary">
+                </div>
+
+                <div class="btn-group col-md-6 mt-2">
+                    <button type="button" class="btn btn-outline-secondary col-md-10" id="inputEventTheme"
+                            data-bs-toggle="collapse" data-bs-target="#collapseEventTheme" aria-expanded="false" aria-controls="collapseEventTheme">
+                        Other
+                    </button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split col-md-2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Birthday</a></li>
+                        <li><a class="dropdown-item">Holiday</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item">Other</a>
+                    </li>
+                    </ul>
+                </div>
+
+                <div class="form-group col-md-6 mt-2">
+                    <button type="button" class="btn btn-outline-secondary col-md-12"
+                            data-bs-toggle="collapse" data-bs-target="#collapseEventRepeat" aria-expanded="false" aria-controls="collapseEventRepeat">
+                        Repeat
+                    </button>
+                </div>
+
+                <div class="collapse row" id="collapseEventTheme">
+                    <div class="form-group col-md-6">
+                        <label for="colorEventTypeBackground">Background</label>
+                        <input type="color" id="colorEventTypeBackground" class="form-control border-secondary">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="colorEventTypeText">Text</label>
+                        <input type="color" id="colorEventTypeText" class="form-control border-secondary">
+                    </div>
+                </div>
+
+                <div class="collapse row" id="collapseEventRepeat">
+                    <div class="btn-group col-md-12 mt-2" role="group">
+                        <input type="checkbox" class="btn-check" id="checkMon" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkMon">Mon</label>
+                        <input type="checkbox" class="btn-check" id="checkTue" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkTue">Tue</label>
+                        <input type="checkbox" class="btn-check" id="checkWed" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkWed">Wed</label>
+                        <input type="checkbox" class="btn-check" id="checkThu" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkThu">Thu</label>
+                        <input type="checkbox" class="btn-check" id="checkFri" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkFri">Fri</label>
+                        <input type="checkbox" class="btn-check" id="checkSat" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkSat">Sat</label>
+                        <input type="checkbox" class="btn-check" id="checkSun" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkSun">Sun</label>
+                    </div>
+                    <div class="btn-group col-md-8 mt-2" role="group">
+                        <input type="checkbox" class="btn-check" id="checkDay" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkDay">Day</label>
+                        <input type="checkbox" class="btn-check" id="checkWeek" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkWeek">Week</label>
+                        <input type="checkbox" class="btn-check" id="checkMonth" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkMonth">Month</label>
+                        <input type="checkbox" class="btn-check" id="checkYear" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="checkYear">Year</label>
+                    </div>
+                    <div class="form-group col-md-4 mt-2">
+                        <input type="number" class="form-control border-secondary" id="inputNumberCount" placeholder="Repeats">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="buttonRequestCreateEvent" class="btn btn-success">Add</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="~/js/modalViews/modalCreateEvent.js?v=1" asp-append-version="true"></script>

@@ -1,0 +1,23 @@
+﻿@model OnlineShopModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+</div>
+
+<div class="row" style="margin:auto; padding:0;">
+    @foreach (var item in Model.Products)
+    {
+        <div class="col-1 d-flex flex-column">
+            <img src="@item.Photo" style="height:40%; width:auto;" />
+            <div>@item.Id: @item.Name @item.Description</div>
+            <div> @item.CountryOrigin </div>
+            <div> @item.Supplier </div>
+            <div> @item.Price </div>
+        </div>
+    }
+</div>

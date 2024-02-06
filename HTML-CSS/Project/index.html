@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/sketchy/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- handdrawn -->
+    <link rel="stylesheet" href="http://fxaeberhard.github.io/handdrawn.css/handdrawn.css">
+
+    <!-- fullcalendar -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+
+    <!-- datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- other -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="assets/scripts/styles.js"></script>
+</head>
+
+
+<body>
+    <div id="container" class="container-fluid position-relative">
+
+        <div id="header" class="row" style="height: 15vh; width: 100%;">
+            <div id="logo" class="col-1" style="height: 100%; width: auto; display: flex; align-items: center;">
+                <img src="assets/images/logo.ico" style="max-height: 100%; width: auto;">
+            </div>
+            <div id="title-contaiter" class="col-1" style="width: auto;">
+                <div id="title" style="height: 100%; width: auto; display: flex; align-items: center;">
+                    <h1 style="font-size: 350%; margin-left: -10%;">Calendar</h1>
+                </div>
+            </div>
+
+            <div id="container_authorization" class="col-1" style="height: 100%; width: 20%; margin-left: 55%; margin-top: 0;">
+                <div class="bs5-example-position p-4 position-relative">
+                    <div id="user-name" class="position-absolute top-50 end-0" style="margin-top: 5%; margin-right: 25%"></div>
+                    <div class="position-absolute top-50 end-0">
+                        <button data-bs-toggle="modal" data-bs-target="#login_modal"
+                                id="authorization" type="button" class="btn btn-outline-primary">
+                            <div class="row">
+                                <div class="col-1" style="width: auto">
+                                    <svg id="icon-non-auth" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
+                                    </svg>
+                                    <svg id="icon-auth" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="body" class="row" style="height: 85vh;">
+            <div id="right-toolbar" style="width: 20%; position: relative;">
+                <button data-bs-toggle="modal" data-bs-target="#myModal"
+                        type="button" class="btn btn-outline-secondary" style="width: 80%; margin-left: 10%; margin-top: 5%;">
+                    Create
+                </button>
+
+                <div id='datepicker' style="margin-top: 7%;" class="breadcrumb">
+                    <script src="assets/scripts/datepicker.js"></script>
+                </div>
+            </div>
+            <div style="width: 80%; margin: 0; padding: 0.5%; padding-left: 0; padding-top: 0;">
+                <div id="calendar" class="breadcrumb"
+                     style="width: 100%; margin: 0; padding: 0.5%; padding-left: 0; padding-top: 0;">
+                    <script src="assets/scripts/calendar.js"></script>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Event -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create event</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body bg-warning">
+                    Title:
+                    <input type="text" id="inputTitle" class="form-control" placeholder="text..." value="title">
+                    <div class="row">
+                        <div class="col">
+                            Start time:
+                            <input type="datetime-local" id="datetimeStart" class="form-control">
+                        </div>
+                        <div class="col">
+                            End time:
+                            <input type="datetime-local" id="datetimeEnd" class="form-control">
+                        </div>
+                        <script src="assets/scripts/modal.js"></script>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Event color:
+                            <input type="color" id="colorBackground" class="form-control" value="#ffA500">
+                        </div>
+                        <div class="col">
+                            Text color:
+                            <input type="color" id="colorText" class="form-control" value="#000000">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="addEvent" type="button" class="btn btn-success" data-bs-dismiss="modal">Success</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authorization -->
+    <div class="modal" id="login_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Authorization</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body bg-warning">
+                    E-mail:
+                    <input type="email" id="inputEmail" class="form-control" placeholder="email">
+                    <div id="error-email" class="invalid-feedback"></div>
+                    Password:
+                    <input type="password" id="inputPassword" class="form-control" placeholder="password">
+                </div>
+                <div class="modal-footer">
+                    <button data-bs-toggle="modal" data-bs-target="#signin_modal"
+                            id="buttonSinginModal" type="button" class="btn btn-info">
+                        Sign in
+                    </button>
+                    <button id="buttonLogin" type="button" class="btn btn-success">Log in</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration -->
+    <div class="modal" id="signin_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Registration</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body bg-warning">
+                    <div class="row">
+                        <div class="col">
+                            Name:
+                            <input type="text" id="inputName" class="form-control" placeholder="name">
+                        </div>
+                        <div class="col">
+                            Surname:
+                            <input type="text" id="inputSurname" class="form-control" placeholder="surname">
+                        </div>
+                    </div>
+                    E-mail:
+                    <input type="email" id="inputEmailReg" class="form-control" placeholder="email">
+                    <div id="error-email-reg" class="invalid-feedback"></div>
+                    Password:
+                    <input type="password" id="inputPasswordReg" class="form-control" placeholder="password">
+                    <div id="error-password-reg" class="invalid-feedback"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="buttonSignin" type="button" class="btn btn-success">Sign in</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/scripts/authorization.js"></script>
+
+</body>
+</html>

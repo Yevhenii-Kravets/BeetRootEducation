@@ -1,0 +1,63 @@
+/*Контейнер для всего Datepicker*/
+.ui-datepicker {
+    background: transparent;
+    border: none;
+    font-family: 'Webcomic', sans-serif;
+}
+
+.ui-datepicker-inline.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+    border: none;
+}
+
+/*Заголовок Datepicker (месяц и год)*/
+.ui-datepicker-header {
+    background: transparent;
+    border: none;
+}
+/*Заголовок текущей даты*/
+.ui-datepicker-title {
+    background: transparent;
+    border: none;
+}
+
+/*Кнопка для перехода к предыдущему месяцу*/
+.ui-datepicker-prev {
+    background: transparent;
+    border: none;
+}
+
+/*Кнопка для перехода к следующему месяцу*/
+.ui-datepicker-next {
+    background: transparent;
+    border: none;
+}
+
+/*Календарь с днями*/
+.ui-datepicker-calendar {
+    background: transparent;
+    border: none;
+}
+
+/*Субботы и воскресенья в календаре*/
+.ui-datepicker-week-end {
+    background: transparent;
+    border: none;
+}
+
+/*Дни других месяцев*/
+.ui-datepicker-other-month {
+    background: transparent;
+    border: none;
+}
+
+/*Текущий день*/
+.ui-datepicker-current-day {
+    background: transparent;
+    border: none;
+}
+
+/*Эффект при наведении на день*/
+.ui-datepicker-days-cell-over {
+    background: transparent;
+    border: none;
+}

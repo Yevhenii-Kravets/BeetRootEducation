@@ -1,0 +1,54 @@
+.fc-header-toolbar.fc-toolbar {
+    padding-top: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.fc-toolbar-chunk {
+    background: transparent;
+}
+
+.fc-view-harness.fc-view-harness-active {
+    background-color: transparent;
+}
+
+.fc-dayGridMonth-view.fc-view.fc-daygrid {
+    background-color: transparent;
+}
+
+.fc-scrollgrid.fc-scrollgrid-liquid thead {
+    background-color: transparent;
+}
+    .fc-scrollgrid.fc-scrollgrid-liquid thead tr {
+        background-color: transparent;
+    }
+        .fc-scrollgrid.fc-scrollgrid-liquid thead tr th {
+            background-color: transparent;
+        }
+
+.fc-scrollgrid.fc-scrollgrid-liquid tbody {
+    background-color: transparent;
+}
+    .fc-scrollgrid.fc-scrollgrid-liquid tbody tr {
+        background-color: transparent;
+    }
+        .fc-scrollgrid.fc-scrollgrid-liquid tbody tr td {
+            background-color: transparent;
+        }
+
+.fc-daygrid-bg-harness {
+    background-color: darkgray;
+}
+
+.fc-day.fc-day-sat.fc-day-today.fc-daygrid-day {
+    background-color: lightgray;
+}
+
+.fc-event.fc-event-draggable.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-block-event.fc-h-event {
+
+}
+
+/* custom classes */
+.event-textsize {
+    font-size: 70%;
+}
